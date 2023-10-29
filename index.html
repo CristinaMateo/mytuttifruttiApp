@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tutti Frutti App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav >
+        <button id="signup">Sign up</button>
+        <button id="login">Log in</button>
+        <button id="log-out" hidden>Log out</button>
+    </nav>
+    <header id="top">
+        <h1>My Tutti Frutti App</h1> 
+    </header>
+    <div id="user-data"></div> 
+    
+
+    <main>
+        <section>
+            <form id ="form1" action="#" method="POST"></form>
+            <form id ="form2" action="#" method="POST"></form>
+        </section>
+
+        <section id="botones">
+            
+                <label for="filtro">Filter by</label>
+                <select name="filtro" id="filtro">
+                    <option value="calories">Calories</option>
+                    <option value="sugar">Sugar</option>
+                    <option value="fiber">Fiber</option>
+                </select>
+            <form id="searcher">
+                <label for="search">Search for a fruit:</label>
+                <input type="text" id="search" name="search" placeholder="Fruit">
+                <button id="go" type="submit">Go</button>
+            </form>
+        </section> 
+
+        <section id="general">
+            <article id="frutas">
+                
+            </article>
+            <aside id="temporada">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, vitae odit! Incidunt iusto necessitatibus dicta quos, pariatur perferendis odio porro atque officiis similique recusandae nulla velit nobis quae corrupti cum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores deleniti necessitatibus autem vero magnam itaque labore esse sit, reiciendis minima corrupti odit deserunt numquam impedit. Dolores laudantium doloribus vel eos! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed a fugiat inventore obcaecati magnam, alias, cumque consequuntur quas, optio reiciendis reprehenderit odio veniam est aspernatur repellat eos sunt ullam libero.</p>
+            </aside> 
+        </section>
+    
+        <section id="gráficas">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, vitae odit! Incidunt iusto necessitatibus dicta quos, pariatur perferendis odio porro atque officiis similique recusandae nulla velit nobis quae corrupti cum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores deleniti necessitatibus autem vero magnam itaque labore esse sit, reiciendis minima corrupti odit deserunt numquam impedit. Dolores laudantium doloribus vel eos! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed a fugiat inventore obcaecati magnam, alias, cumque consequuntur quas, optio reiciendis reprehenderit odio veniam est aspernatur repellat eos sunt ullam libero.</p>
+        </section>
+        
+
+    </main>
+
+    <footer>
+        <div class="top"><a href="#top">  Back to top &#128285;</a></div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+/*general*/
+:root {
+    --orange: #FDB55D;
+    --lightor:#ffd4a0;
+    --yellow: #e7e14d;
+    --lightyel:#f6f3a2;
+    --green:#b2d05e;
+    --lightgr: #edffbb;
+  }
+*{
+    box-sizing: border-box;
+  }
+  
+html {
+      scroll-behavior: smooth;
+    }
+  
+body {
+    background: url('./assets/fondo.jpg') ;
+    background-position: absolute; 
+    background-size: cover;
+    background-repeat:repeat-y;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    backdrop-filter: blur(1px);
+    }
+
+header{
+    width:70%;
+    margin:auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--orange);
+    border-radius: 20px;
+    }
+
+main{
+      width:90%;
+      margin:auto;
+      display: flex;
+      flex-wrap: wrap;
+      }
+  
+nav{
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        }
+    
+  nav > button {
+    background-color: #fff7ec ;
+    padding: 0.7em 1.1em;
+    text-decoration: none;
+    text-align: center;
+    border:#FDB55D solid;
+    margin: 2px
+    }
+  
+  nav >button:hover{
+      background-color:var(--lightor) ;
+      cursor: pointer;
+    }
+  
+    h1{
+    text-align: center;
+    color: white;
+    }
+   
+
+    footer{
+      margin-top: 50px;
+      margin-bottom: 60px;
+    }
+   
+    div.top{
+      position:fixed;
+      bottom:10px;
+      right: 10px;
+      background-color: var(--lightgr);
+      padding: 10px;
+      border-radius: 5px;
+      opacity:80%;
+      -webkit-box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 5px 5px 3px 5px rgba(252,213,206,0); 
+      box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 5px 5px 3px 5px rgba(252,213,206,0);
+  }
+  
+    div.top > a{
+      text-decoration: none;
+      color:black;
+  }
+
+  #botones{
+    width: 90%;
+    display: inline;
+    margin: 20px auto;
+  }
+
+#searcher{
+    margin-top: 10px;
+}
+
+  #searcher>button{
+    width: 15%;
+    background: var(--green);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    
+  }
+
+  #general{
+    width:100%;
+    margin:auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #frutas{
+    flex: 80%;
+    padding: 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+  .card{
+    background-color: whitesmoke;
+    width: 23%;
+    margin: 10px auto;
+    display:grid;
+    justify-content: center;
+  }
+
+  .fruitimg{
+    width: 70%;
+    margin: 10px auto;
+  }
+
+  .card > p{
+    text-align: center;
+    background-color: var(--lightgr);
+  }
+
+
+  aside{
+    flex: 20%;
+    padding: 1.25em 0.8em;
+    margin-top: 1.25em;
+    background-color: var(--yellow);
+    height: fit-content;
+  }
+  
+  aside > img{
+    width: 100%;
+  }
+  
+  aside > img > p{
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    margin-top: 0.05em;
+  }
+  
+  aside > button{
+    border: #527150 dashed;
+    padding: 0.5em;
+    border-radius: 0.25em;
+  }
+  
+  aside > button > a{
+    text-decoration: none;
+    color: black;
+    margin: 4em auto;
+  }
+
+  
