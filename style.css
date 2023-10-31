@@ -2,7 +2,7 @@
 :root {
     --orange: rgb(253, 181, 93);
     --lightor:#ffd4a0;
-    --yellow: #e7e14d;
+    --yellow: rgb(231, 225, 77);
     --lightyel:#f6f3a2;
     --green:rgb(178, 208, 94);
     --lightgr: #edffbb;
@@ -104,7 +104,7 @@ nav{
     margin-top: 10px;
 }
 
-  #searcher>button{
+  #searcher>#go{
     width: 15%;
     background: var(--green);
     color: white;
@@ -136,13 +136,20 @@ nav{
     display:grid;
     justify-content: center;
   }
+  .indvcard{
+    background-color: whitesmoke;
+    width: 50%;
+    margin: 10px auto;
+    display:grid;
+    justify-content: center;
+  }
 
   .fruitimg{
     width: 70%;
     margin: 10px auto;
   }
 
-  .card > p{
+  .card > h3{
     text-align: center;
     background-color: var(--lightgr);
   }
@@ -180,9 +187,12 @@ nav{
 
 
   .charts{
-    height: 500px;
-    width: 890px;
-    margin: 30px auto;
+    flex: 45%;
+    margin: 30px 70px;
     background-color: white;
   }
 
+#graficas{
+  width: 80%;
+  margin: auto;
+}

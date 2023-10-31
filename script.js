@@ -44,11 +44,47 @@ const cardTemplate = function (image, fruit) {
     
         }
         generarGrafica()
-       
 
   }
   
 getFruits()
+
+
+  
+document.getElementById("searcher").addEventListener("submit", function(event) {   
+
+  event.preventDefault();
+
+  let fruitSearch = event.target.search.value;  
+  
+  fetch(`https://www.fruityvice.com/api/fruit/${fruitSearch}`)
+  .then(res => res.json())
+  .then(data => {
+
+      let tarjetas = ""
+
+   
+     tarjetas+= cardTemplate(`./assets/${data.name}.jpg`, data.name)
+    
+    fruitsNode.innerHTML = tarjetas
+    });
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function generarGrafica(){
@@ -78,9 +114,9 @@ new Chart(sugarchart, {
 });
 
 
-const caloriesChart = document.getElementById('chart2');
+const proteinChart = document.getElementById('chart2');
 
-new Chart(caloriesChart, {
+new Chart(proteinChart, {
   type: 'bar',
   data: {
     labels: nombre,
@@ -103,6 +139,58 @@ new Chart(caloriesChart, {
   }
 });
 
+
+
+const carbsChart = document.getElementById('chart3');
+
+new Chart(carbsChart, {
+  type: 'bar',
+  data: {
+    labels: nombre,
+    datasets: [{
+      label: 'carbs in fruits',
+      data: carbs,
+      borderWidth: 1,
+      backgroundColor: [
+        'rgb(231, 225, 77)',
+      ]
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    },
+
+  }
+});
+
+
+const caloriesChart = document.getElementById('chart4');
+
+new Chart(caloriesChart, {
+  type: 'bar',
+  data: {
+    labels: nombre,
+    datasets: [{
+      label: 'calories in fruits',
+      data: calories,
+      borderWidth: 1,
+      backgroundColor: [
+        'rgb(178, 208, 94)',
+      ]
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    },
+
+  }
+});
 
 }
       
