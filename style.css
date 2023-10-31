@@ -1,10 +1,10 @@
 /*general*/
 :root {
-    --orange: #FDB55D;
+    --orange: rgb(253, 181, 93);
     --lightor:#ffd4a0;
     --yellow: #e7e14d;
     --lightyel:#f6f3a2;
-    --green:#b2d05e;
+    --green:rgb(178, 208, 94);
     --lightgr: #edffbb;
   }
 *{
@@ -178,4 +178,11 @@ nav{
     margin: 4em auto;
   }
 
-  
+
+  .charts{
+    height: 500px;
+    width: 890px;
+    margin: 30px auto;
+    background-color: white;
+  }
+
