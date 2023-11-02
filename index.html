@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tutti Frutti App</title>
     <link rel="stylesheet" href="./style.css">
+    <link href='https://fonts.googleapis.com/css?family=Yomogi' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -26,18 +27,39 @@
         </section>
 
         <section id="botones">
-            
-                <label for="filtro">Filter by</label>
+            <form id="filterForm">
+                <label for="filtro">Filter by fruit order-type</label>
                 <select name="filtro" id="filtro">
-                    <option value="calories">Calories</option>
-                    <option value="sugar">Sugar</option>
-                    <option value="fiber">Fiber</option>
+                    <option value="none">None</option>
+                    <option value="rosales">Rosales</option>
+                    <option value="zingiberales">Zingiberales</option>
+                    <option value="solanales">Solanales</option>
+                    <option value="malvales">Malvales</option>
+                    <option value="ericales">Ericales</option>
+                    <option value="sapindales">Sapindales</option>
+                    <option value="poales">Poales</option>
+                    <option value="saxifragales">Saxifragales</option>
+                    <option value="malpighiales">Malpighiales</option>
+                    <option value="cucurbitales">Cucurbitales</option>
+                    <option value="myrtales">Myrtales</option>
+                    <option value="caricacea">Caricacea</option>
+                    <option value="caryophyllales">Caryophyllales</option>
+                    <option value="vitales">Vitales</option>
+                    <option value="myrtoideae">Myrtoideae</option>
+                    <option value="laurales">Laurales</option>
+                    <option value="fagales">Fagales</option>
+                    <option value="cucurbitaceae">Cucurbitaceae</option>
                 </select>
+                    <input type="submit" id="filter" value="Go"></input>
+            </form>
+
+
             <form id="searcher">
                 <label for="search">Search for a fruit:</label>
                 <input type="text" id="search" name="search" placeholder="Fruit">
-                <input id="go" type="submit"></input>
+                <input id="go" type="submit" value="Go"></input>
             </form>
+
 
             <button id="reload">Página inicial</button>
         </section> 

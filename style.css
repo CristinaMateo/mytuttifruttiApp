@@ -16,6 +16,8 @@ html {
     }
   
 body {
+    font-family: 'Yomogi';
+    font-size: 20px;
     background: url('./assets/fondo.jpg') ;
     background-position: absolute; 
     background-size: cover;
@@ -97,7 +99,23 @@ nav{
   #botones{
     width: 90%;
     display: inline;
-    margin: 20px auto;
+    margin: 50px auto;
+  }
+
+  #filtro{
+    margin-bottom: 30px;
+  }
+  #filter{
+    width: 5%;
+    background: var(--green);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    &:active{
+      background-color: rgb(142, 168, 71);
+    }
   }
 
 #searcher{
@@ -105,14 +123,16 @@ nav{
 }
 
   #searcher>#go{
-    width: 15%;
+    width: 5%;
     background: var(--green);
     color: white;
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-    
+    &:active{
+      background-color: rgb(142, 168, 71);
+    }
   }
 
   #reload{
@@ -125,6 +145,9 @@ nav{
     border-left: none;
     cursor: pointer;
     margin-top: 20px;
+    &:active{
+      background-color: rgb(171, 167, 60);;
+    }
   }
 
   #general{
@@ -147,6 +170,8 @@ nav{
     margin: 10px auto;
     display:grid;
     justify-content: center;
+    box-shadow: darkgray 1px 1px 3px 0px;
+    border-radius: 6px;
   }
   .indvcard{
     background-color: whitesmoke;
