@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tutti Frutti App</title>
     <link rel="stylesheet" href="./style.css">
+    <link href='https://fonts.googleapis.com/css?family=Yomogi' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav >
@@ -25,18 +27,41 @@
         </section>
 
         <section id="botones">
-            
-                <label for="filtro">Filter by</label>
+            <form id="filterForm">
+                <label for="filtro">Filter by fruit order-type</label>
                 <select name="filtro" id="filtro">
-                    <option value="calories">Calories</option>
-                    <option value="sugar">Sugar</option>
-                    <option value="fiber">Fiber</option>
+                    <option value="none">None</option>
+                    <option value="rosales">Rosales</option>
+                    <option value="zingiberales">Zingiberales</option>
+                    <option value="solanales">Solanales</option>
+                    <option value="malvales">Malvales</option>
+                    <option value="ericales">Ericales</option>
+                    <option value="sapindales">Sapindales</option>
+                    <option value="poales">Poales</option>
+                    <option value="saxifragales">Saxifragales</option>
+                    <option value="malpighiales">Malpighiales</option>
+                    <option value="cucurbitales">Cucurbitales</option>
+                    <option value="myrtales">Myrtales</option>
+                    <option value="caricacea">Caricacea</option>
+                    <option value="caryophyllales">Caryophyllales</option>
+                    <option value="vitales">Vitales</option>
+                    <option value="myrtoideae">Myrtoideae</option>
+                    <option value="laurales">Laurales</option>
+                    <option value="fagales">Fagales</option>
+                    <option value="cucurbitaceae">Cucurbitaceae</option>
                 </select>
+                    <input type="submit" id="filter" value="Go"></input>
+            </form>
+
+
             <form id="searcher">
                 <label for="search">Search for a fruit:</label>
                 <input type="text" id="search" name="search" placeholder="Fruit">
-                <button id="go" type="submit">Go</button>
+                <input id="go" type="submit" value="Go"></input>
             </form>
+
+
+            <button id="reload">Página inicial</button>
         </section> 
 
         <section id="general">
@@ -48,8 +73,11 @@
             </aside> 
         </section>
     
-        <section id="gráficas">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, vitae odit! Incidunt iusto necessitatibus dicta quos, pariatur perferendis odio porro atque officiis similique recusandae nulla velit nobis quae corrupti cum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores deleniti necessitatibus autem vero magnam itaque labore esse sit, reiciendis minima corrupti odit deserunt numquam impedit. Dolores laudantium doloribus vel eos! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed a fugiat inventore obcaecati magnam, alias, cumque consequuntur quas, optio reiciendis reprehenderit odio veniam est aspernatur repellat eos sunt ullam libero.</p>
+        <section id="graficas">
+                <canvas id="chart1" class="charts"></canvas>
+                <canvas id="chart2" class="charts"></canvas>
+                <canvas id="chart3" class="charts"></canvas>
+                <canvas id="chart4" class="charts"></canvas>
         </section>
         
 
@@ -60,5 +88,6 @@
     </footer>
 
     <script src="./script.js"></script>
+    
 </body>
 </html>
