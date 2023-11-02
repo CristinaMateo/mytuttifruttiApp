@@ -50,7 +50,7 @@ const cardTemplate = function (image, fruit) {
 getFruits()
 
 const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
-  return `<div class="indvcard">
+  return `<article class="indvcard">
               <img src="${image}" alt="${fruit}" class="fruitimg">
               <h3 class="center">${fruit}</h3>
               <p class="details">Calories: ${calories}</p>
@@ -58,7 +58,7 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
               <p class="details">Carbs: ${carbs}</p>
               <p class="details">Fat: ${fat}</p>
               <p class="details">Sugar: ${sugar}</p>
-            </div>`;
+            </article>`;
 };
   
 document.getElementById("searcher").addEventListener("submit", function(event) {   
@@ -80,9 +80,14 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
     
     fruitsNode.innerHTML = tarjetas
     });
+document.getElementById("reload").style.visibility ="visible";
+});
 
+document.getElementById("reload").addEventListener("click", function() {
 
-})
+location.reload();
+
+});
 
 
 

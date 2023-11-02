@@ -115,6 +115,18 @@ nav{
     
   }
 
+  #reload{
+    visibility: hidden;
+    width: 15%;
+    background: var(--yellow);
+    color: rgb(104, 97, 97);
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
   #general{
     width:100%;
     margin:auto;
