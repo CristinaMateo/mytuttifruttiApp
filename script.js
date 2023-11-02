@@ -13,7 +13,7 @@ let nombre = [];
 const cardTemplate = function (image, fruit) {
     return `<div class="card">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
-                <p class="center">${fruit}</p>
+                <h3 class="center">${fruit}</h3>
               </div>`;
   };
 
@@ -49,11 +49,23 @@ const cardTemplate = function (image, fruit) {
   
 getFruits()
 
-
+const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
+  return `<div class="indvcard">
+              <img src="${image}" alt="${fruit}" class="fruitimg">
+              <h3 class="center">${fruit}</h3>
+              <p class="details">Calories: ${calories}</p>
+              <p class="details">Protein: ${protein}</p>
+              <p class="details">Carbs: ${carbs}</p>
+              <p class="details">Fat: ${fat}</p>
+              <p class="details">Sugar: ${sugar}</p>
+            </div>`;
+};
   
 document.getElementById("searcher").addEventListener("submit", function(event) {   
 
   event.preventDefault();
+  document.getElementById("graficas").style.display = "none";
+  document.getElementById("temporada").style.display = "none";
 
   let fruitSearch = event.target.search.value;  
   
@@ -64,7 +76,7 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
       let tarjetas = ""
 
    
-     tarjetas+= cardTemplate(`./assets/${data.name}.jpg`, data.name)
+     tarjetas+= indvcardTemplate(`./assets/${data.name}.jpg`, data.name, data.nutritions.calories, data.nutritions.fat, data.nutritions.sugar, data.nutritions.carbohydrates, data.nutritions.protein)
     
     fruitsNode.innerHTML = tarjetas
     });

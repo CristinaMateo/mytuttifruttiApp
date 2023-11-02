@@ -149,11 +149,15 @@ nav{
     margin: 10px auto;
   }
 
-  .card > h3{
+  .card > h3, .indvcard > h3{
     text-align: center;
     background-color: var(--lightgr);
+    height: fit-content;
   }
 
+  .indvcard > p{
+    text-align: center;
+  }
 
   aside{
     flex: 20%;
