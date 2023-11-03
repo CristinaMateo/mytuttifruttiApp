@@ -166,8 +166,9 @@ async function getFruits() {
     data.forEach(fruit => {
       document.getElementById(`card-${fruit.name}`).addEventListener("click", function() {
         showIndvCard(fruit);
+        document.getElementById("reload").style.visibility = "visible"
       });
-      document.getElementById("reload").style.visibility = "visible"
+     
     });
   
     for(let i = 0; i < data.length; i++){
