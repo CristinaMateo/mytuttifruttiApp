@@ -123,12 +123,12 @@ function generarGrafica(){
   }
 
 
-const cardTemplate = function (image, fruit) {
+  const cardTemplate = function (image, fruit) {
     return `<div class="card" id="card-${fruit}">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
                 <h3 class="center">${fruit}</h3>
               </div>`;
-  };
+};
 
 const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
   return `<article class="indvcard">
@@ -142,34 +142,46 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
             </article>`;
 };
 
+function showIndvCard(fruit) {
+  // Aquí deberías definir cómo quieres mostrar la tarjeta individual
+  // Por ejemplo, puedes usar la función indvcardTemplate y añadir el HTML resultante al DOM
+  let tarjetaIndividual = indvcardTemplate(`./assets/${fruit.name}.jpg`, fruit.name, fruit.nutritions.calories, fruit.nutritions.fat, fruit.nutritions.sugar, fruit.nutritions.carbohydrates, fruit.nutritions.protein);
+  fruitsNode.innerHTML = tarjetaIndividual;
+}
+
 
 //para mostrar todas las frutas
-  async function getFruits() {
+async function getFruits() {
     let response = await fetch(api);
     let data = await response.json();
   
-        let cards = ""
+    let cards = ""
   
-      for (let i = 0; i < data.length; i++) {
-       cards+= cardTemplate(`./assets/${data[i].name}.jpg`, data[i].name)
-      }
-      fruitsNode.innerHTML = cards
+    for (let i = 0; i < data.length; i++) {
+      cards += cardTemplate(`./assets/${data[i].name}.jpg`, data[i].name);
+    }
+    fruitsNode.innerHTML = cards;
   
+    // Agregar controladores de eventos click a las tarjetas de frutas
+    data.forEach(fruit => {
+      document.getElementById(`card-${fruit.name}`).addEventListener("click", function() {
+        showIndvCard(fruit);
+      });
+      document.getElementById("reload").style.visibility = "visible"
+    });
   
-      for(let i = 0; i < data.length; i++){
-          calories.push(data[i].nutritions.calories)
-          fat.push(data[i].nutritions.fat)  
-          sugar.push(data[i].nutritions.sugar)  
-          carbs.push(data[i].nutritions.carbohydrates)  
-          protein.push(data[i].nutritions.protein)
-          nombre.push(data[i].name)  
-    
-        }
-        generarGrafica()
+    for(let i = 0; i < data.length; i++){
+      calories.push(data[i].nutritions.calories)
+      fat.push(data[i].nutritions.fat)  
+      sugar.push(data[i].nutritions.sugar)  
+      carbs.push(data[i].nutritions.carbohydrates)  
+      protein.push(data[i].nutritions.protein)
+      nombre.push(data[i].name)  
 
+    }
+    generarGrafica()
   }
   
-
   
 getFruits()
 
