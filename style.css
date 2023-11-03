@@ -118,6 +118,24 @@ nav{
     }
   }
 
+
+  #ordenar{
+    margin-bottom: 30px;
+  }
+
+  #sort{
+    width: 5%;
+    background: var(--green);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    &:active{
+      background-color: rgb(142, 168, 71);
+    }
+  }
+
 #searcher{
     margin-top: 10px;
 }
@@ -134,6 +152,7 @@ nav{
       background-color: rgb(142, 168, 71);
     }
   }
+  
 
   #reload{
     visibility: hidden;
@@ -170,8 +189,8 @@ nav{
     margin: 10px auto;
     display:grid;
     justify-content: center;
-    box-shadow: darkgray 1px 1px 3px 0px;
-    border-radius: 6px;
+    box-shadow: #573102 5px 6px 20px 0px;
+    border-radius: 9px;
   }
   .indvcard{
     background-color: whitesmoke;
@@ -236,4 +255,9 @@ nav{
 #graficas{
   width: 80%;
   margin: auto;
+}
+
+#chart1, #chart2,#chart3,#chart4{
+  box-shadow: #2b4429 5px 6px 20px 0px;
+  border-radius: 7px;
 }

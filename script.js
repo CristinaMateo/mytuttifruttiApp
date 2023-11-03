@@ -124,7 +124,7 @@ function generarGrafica(){
 
 
 const cardTemplate = function (image, fruit) {
-    return `<div class="card">
+    return `<div class="card" id="card-${fruit}">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
                 <h3 class="center">${fruit}</h3>
               </div>`;
@@ -169,6 +169,8 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
 
   }
   
+
+  
 getFruits()
 
 
@@ -178,8 +180,15 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
   event.preventDefault();
   document.getElementById("graficas").style.display = "none";
   document.getElementById("temporada").style.display = "none";
+  document.getElementById("reload").style.visibility = "visible"
 
   let fruitSearch = event.target.search.value;  
+
+  if(fruitSearch.value == undefined){
+    alert("Not an existent fruit")
+    location.reload()
+  } else if(fruitSearch.value != undefined){
+
   
   fetch(`https://www.fruityvice.com/api/fruit/${fruitSearch}`)
   .then(res => res.json())
@@ -192,8 +201,8 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
     
     fruitsNode.innerHTML = tarjetas
     });
-    //crear un mensaje de error
-document.getElementById("reload").style.visibility ="visible";
+ 
+  }
 });
 
 
@@ -207,6 +216,10 @@ document.getElementById("filterForm").addEventListener("submit", function(event)
 
   let orderFilter = filterForm.filtro.value 
 
+  if(orderFilter == "none"){
+    location.reload()
+  }else if(orderFilter != "none"){
+
   fetch(`https://www.fruityvice.com/api/fruit/order/${orderFilter}`)
   .then(res => res.json())
   .then(data => {
@@ -219,16 +232,47 @@ document.getElementById("filterForm").addEventListener("submit", function(event)
     fruitsNode.innerHTML = cards
 
   });
-  document.getElementById("reload").style.visibility ="visible";
+  }
+  document.getElementById("reload").style.visibility = "visible"
 });
 
 
 
+document.getElementById("sortForm").addEventListener("submit", function(event) {   
 
+  event.preventDefault();
+  
+  document.getElementById("graficas").style.display = "none";
+  document.getElementById("temporada").style.display = "none";
 
+  let sortFilter = document.getElementById("ordenar").value;
 
+  if(sortFilter == "none"){
+    location.reload()
+  }else if(sortFilter != "none"){
+    sortFruits(sortFilter);
 
+  }
+  document.getElementById("reload").style.visibility = "visible"
+});
 
+async function sortFruits(sortFilter) {
+  let data = await fetch(api).then(res => res.json());
+  if (sortFilter == "az") {
+    data.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortFilter == "za") {
+    data.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortFilter == "caloriesup") {
+    data.sort((a, b) => a.nutritions.calories - b.nutritions.calories);
+  } else if (sortFilter == "caloriesdown") {
+    data.sort((a, b) => b.nutritions.calories - a.nutritions.calories);
+  }
 
+  let cards = "";
+  for (let i = 0; i < data.length; i++) {
+    cards += cardTemplate(`./assets/${data[i].name}.jpg`, data[i].name);
+  }
+  fruitsNode.innerHTML = cards;
+}
       
 

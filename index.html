@@ -53,13 +53,23 @@
                     <input type="submit" id="filter" value="Go"></input>
             </form>
 
+            <form id="sortForm">
+                <label for="ordenar">Choose sort-type</label>
+                <select name="ordenar" id="ordenar">
+                    <option value="none">None</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                    <option value="caloriesup">Calories Ascendent</option>
+                    <option value="caloriesdown">Calories Descendent</option>
+                </select>
+                    <input type="submit" id="sort" value="Go"></input>
+            </form>
 
             <form id="searcher">
                 <label for="search">Search for a fruit:</label>
                 <input type="text" id="search" name="search" placeholder="Fruit">
                 <input id="go" type="submit" value="Go"></input>
             </form>
-
 
             <button id="reload">Página inicial</button>
         </section> 
