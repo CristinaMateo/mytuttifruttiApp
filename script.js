@@ -7,7 +7,18 @@ let protein = [];
 let nombre = [];
 const fruitsNode = document.getElementById("frutas");
 const api = 'https://www.fruityvice.com/api/fruit/all'
-
+const enero = ["Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Avocado', 'Papaya', 'Pear', 'Pineapple', 'Banana', 'Kiwi', 'Lemon', 'Tangerine', 'Mango', 'Apple', 'Orange', 'Pomelo', "Tomato", 'Pomegranate', 'Persimmon']
+const febr =['Banana', 'Pomelo', 'Tomato','Persimmon', 'Pomegranate', 'Avocado', 'Kiwi', 'Lemon', 'Tangerine', 'Mango', 'Apple', 'Orange', 'Papaya', 'Pear', 'Pineapple',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry"]
+const marzo =['Pineapple', 'Banana', 'Pomelo', 'Avocado', 'Lemon', 'Strawberries', 'Mango', 'Apple', 'Orange', 'Papaya', 'Pear', 'Tomato', 'Kiwi',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry"]
+const abril =['Strawberry',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Lemon', 'Mango', 'Banana', 'Orange', 'Papaya', 'Pineapple', 'Avocado', 'Plum', 'Apple', 'Kiwi', 'Pear', 'Pomelo']
+const mayo =['Lemon', 'Mango', 'Melon', "Hazelnut", "Blueberry", "Lingonberry", "Cranberry",'Apricot', 'Cherry', 'Plum', 'Strawberry', 'Papaya', 'Banana','Avocado', 'Kiwi', 'Grapefruit', 'Pineapple', 'Apple', 'Orange', 'Pear', 'Lychee']
+const jun =['Gooseberry', 'Apricot', 'Fig', 'Cherry', 'Plum', 'Raspberry', 'Strawberry', 'Lemon', 'Mango', "Hazelnut", "Blueberry", "Lingonberry", "Cranberry",'Peach', 'Melon', 'Banana', 'Lychee','Avocado', 'Apple', 'Orange', 'Pear', 'Pineapple', 'Watermelon', 'Kiwi']
+const jul =['Apricot', 'Plum', 'Raspberry', 'Gooseberry',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Fig', 'Cherry', 'Mango', 'Peach', 'Melon', 'Pear', 'Banana', 'Watermelon', 'Pineapple', 'Avocado', 'Kiwi', 'Lemon', 'Apple', 'Lychee']
+const agos =['Pear', 'Banana', 'Watermelon', 'Grape', , 'Plum', 'Raspberry', 'Gooseberry', 'Fig', 'Mango', 'Peach', "Hazelnut", "Blueberry", "Lingonberry", "Cranberry",'Melon', 'Blackberry', 'Kiwi', 'Lemon', 'Apple', 'Pineapple', 'Apricot', 'Avocado', 'Cherry']
+const sept =['Avocado', 'Raspberry', 'Fig', 'Kiwi',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Mango', 'Apple', 'Melon', 'Pear', 'Banana', 'Grape', 'Peach', 'Blackberry', 'Pineapple', 'Watermelon', 'Plum', 'Pomegranate', 'Lemon', 'Tangerine']
+const oct =['Avocado',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Persimmon', 'Tangerine', 'Mango', 'Apple', 'Peach', 'Papaya', 'Pear', 'Pineapple', 'Banana', 'Grape', 'Pomegranate', 'Fig', 'Lemon', 'Orange']
+const nov =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Mango', 'Apple', 'Papaya', 'Pear', "Hazelnut", "Blueberry", "Lingonberry", "Cranberry",'Pineapple', 'Banana', 'Lemon', 'Tangerine', 'Orange', 'Grape']
+const dic =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Lemon', 'Papaya',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry",  'Pear', 'Pineapple', 'Banana', 'Tomato', 'Tangerine', 'Apple', 'Orange', 'Mango', 'Grape']
 //para volver a la página inicial
 document.getElementById("reload").addEventListener("click", function() {
 
@@ -123,12 +134,12 @@ function generarGrafica(){
   }
 
 
-const cardTemplate = function (image, fruit) {
+  const cardTemplate = function (image, fruit) {
     return `<div class="card" id="card-${fruit}">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
                 <h3 class="center">${fruit}</h3>
               </div>`;
-  };
+};
 
 const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
   return `<article class="indvcard">
@@ -142,37 +153,122 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
             </article>`;
 };
 
+function showIndvCard(fruit) {
+  let tarjetaIndividual = indvcardTemplate(`./assets/${fruit.name}.jpg`, fruit.name, fruit.nutritions.calories, fruit.nutritions.fat, fruit.nutritions.sugar, fruit.nutritions.carbohydrates, fruit.nutritions.protein);
+  fruitsNode.innerHTML = tarjetaIndividual;
+}
+
+
+
+//mostrar frutas de temporada
+function comprobarMes(){
+  let fecha = new Date (Date.now())
+  let mes = fecha.getMonth()
+  console.log(fecha)
+  console.log(mes)
+  let frutas = [];
+  
+  
+  switch (mes) {
+  case 0:
+    console.log('Enero');
+    frutas = enero
+    break;
+  case 1:
+    console.log('Febrero');
+    frutas = febr
+    break;
+    case 2:
+    console.log('Marzo');
+    frutas = marzo
+    break;
+    case 3:
+    console.log('Abril');
+    frutas =abril
+    break;
+    case 4:
+    console.log('Mayo');
+    frutas = mayo
+    break;
+    case 5:
+    console.log('Junio');
+    frutas = jun
+    break;
+    case 6:
+    console.log('Julio');
+    frutas = jul
+    break;
+    case 7:
+    console.log('Agosto');
+    frutas = agos
+    break;
+    case 8:
+    console.log('Septiembre');
+    frutas = sept
+    break;
+    case 9:
+    console.log('Octubre');
+    frutas =oct
+    break;
+  case 10:
+    console.log('Noviembre');
+    frutas = nov;
+    break;
+    case 11:
+    console.log('Diciembre');
+    frutas = dic
+    break;
+
+  }
+  let ul = document.getElementById("frutTemp");
+  ul.innerHTML = ''; // Limpiar la lista antes de añadir los nuevos elementos
+  
+  frutas.forEach(function(fruta) {
+    let li = document.createElement("li");
+    li.appendChild(document.createTextNode(fruta));
+    ul.appendChild(li);
+  });
+}
+
+
+
 
 //para mostrar todas las frutas
-  async function getFruits() {
+async function getFruits() {
     let response = await fetch(api);
     let data = await response.json();
   
-        let cards = ""
+    let cards = ""
   
-      for (let i = 0; i < data.length; i++) {
-       cards+= cardTemplate(`./assets/${data[i].name}.jpg`, data[i].name)
-      }
-      fruitsNode.innerHTML = cards
+    for (let i = 0; i < data.length; i++) {
+      cards += cardTemplate(`./assets/${data[i].name}.jpg`, data[i].name);
+    }
+    fruitsNode.innerHTML = cards;
   
+    // Agregar controladores de eventos click a las tarjetas de frutas
+    data.forEach(fruit => {
+      document.getElementById(`card-${fruit.name}`).addEventListener("click", function() {
+        showIndvCard(fruit);
+        document.getElementById("reload").style.visibility = "visible"
+      });
+     
+    });
   
-      for(let i = 0; i < data.length; i++){
-          calories.push(data[i].nutritions.calories)
-          fat.push(data[i].nutritions.fat)  
-          sugar.push(data[i].nutritions.sugar)  
-          carbs.push(data[i].nutritions.carbohydrates)  
-          protein.push(data[i].nutritions.protein)
-          nombre.push(data[i].name)  
-    
-        }
-        generarGrafica()
+    for(let i = 0; i < data.length; i++){
+      calories.push(data[i].nutritions.calories)
+      fat.push(data[i].nutritions.fat)  
+      sugar.push(data[i].nutritions.sugar)  
+      carbs.push(data[i].nutritions.carbohydrates)  
+      protein.push(data[i].nutritions.protein)
+      nombre.push(data[i].name)  
 
+    }
+    generarGrafica()
   }
   
-
   
 getFruits()
-
+comprobarMes()
 
   //cuando se busca una sola fruta
 document.getElementById("searcher").addEventListener("submit", function(event) {   
@@ -184,15 +280,10 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
 
   let fruitSearch = event.target.search.value;  
 
-  if(fruitSearch.value == undefined){
-    alert("Not an existent fruit")
-    location.reload()
-  } else if(fruitSearch.value != undefined){
-
   
-  fetch(`https://www.fruityvice.com/api/fruit/${fruitSearch}`)
-  .then(res => res.json())
-  .then(data => {
+    fetch(`https://www.fruityvice.com/api/fruit/${fruitSearch}`)
+                    .then(res => res.json())
+                    .then(data => {
 
       let tarjetas = ""
 
@@ -202,7 +293,7 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
     fruitsNode.innerHTML = tarjetas
     });
  
-  }
+ 
 });
 
 
