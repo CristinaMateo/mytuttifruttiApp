@@ -10,9 +10,9 @@
 </head>
 <body>
     <nav >
-        <button id="signup">Sign up</button>
-        <button id="login">Log in</button>
-        <button id="log-out" hidden>Log out</button>
+        <button id="signup-login">Sign up/Log in</button>
+        <button id="log-out" >Log out</button>
+        <button id="back">Back to Home</button>
     </nav>
     <header id="top">
         <h1>My Tutti Frutti App</h1> 
@@ -21,9 +21,34 @@
     
 
     <main>
-        <section>
-            <form id ="form1" action="#" method="POST"></form>
-            <form id ="form2" action="#" method="POST"></form>
+        <section id = "userForms">
+            <form id ="form1" action="#" method="POST">
+                <h3>Create an account</h3>
+                <fieldset>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
+                    <label for="signup-user">Username: </label> <br>
+                    <input type="text" id="signup-user" name="signup-user" placeholder ="Username"><br>
+                    <label for="pass">Password:</label><br>
+                    <input type="password" id="pass" name="pass" placeholder="Introduce password..."><br>
+                    <label for="pass2">Repeat password:</label><br>
+                    <input type="password" id="pass2" name="pass2" placeholder="Repite password..."><br>
+                    <label for="signup-picture">Picture: </label><br>
+                    <input type="file" id="signup-picture" accept="image/*" name="signup-picture"><br><br>
+                    <input type="submit" value="Create" id="create">                 
+                </fieldset>
+            </form>
+            <form id ="form2" action="#" method="POST">
+                <h3>Log in</h3>
+                <fieldset>
+                    <label for="email2">Email:</label><br>
+                    <input type="email" id="email2" name="email2" placeholder="Introduce email..."><br>
+                    <label for="pass3">Password:</label><br>
+                    <input type="password" id="pass3" name="pass3" placeholder="Introduce password..."><br>
+                    <input type="submit" value="Log in" id="log"> 
+                </fieldset>
+            </form>
+            <p id="msgerr"></p>
         </section>
 
         <section id="botones">
@@ -71,7 +96,7 @@
                 <input id="go" type="submit" value="Go"></input>
             </form>
 
-            <button id="reload">Página inicial</button>
+            <button id="reload">Back to Home</button>
         </section> 
 
         <section id="general">

@@ -26,6 +26,12 @@ document.getElementById("reload").addEventListener("click", function() {
   
   });
 
+  document.getElementById("back").addEventListener("click", function() {
+
+    location.reload();
+    
+    });
+
 function generarGrafica(){
   const sugarchart = document.getElementById('chart1');
   
@@ -366,4 +372,16 @@ async function sortFruits(sortFilter) {
   fruitsNode.innerHTML = cards;
 }
       
+
+document.getElementById("signup-login").addEventListener("click", function(){
+  document.getElementById("botones").style.display="none"
+  document.getElementById("graficas").style.display="none"
+  document.getElementById("general").style.display="none"
+  document.getElementById("signup-login").style.display="none"
+  document.getElementById("back").style.visibility="visible"
+  document.getElementById("form1").style.display = "block"
+  document.getElementById("form2").style.display = "block"
+})
+
+
 

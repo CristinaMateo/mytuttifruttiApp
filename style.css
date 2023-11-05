@@ -1,14 +1,14 @@
 /*general*/
 :root {
-    --orange: rgb(253, 181, 93);
+    --orange: #fdb55d;
+    --yellow: #e7e14d;
+    --green:#b2d05e;
+    --darkor:#c26f0a;
+    --darkgr:#819744;
+    --darkyel:#b5af03;
     --lightor:#ffd4a0;
-    --yellow: rgb(231, 225, 77);
     --lightyel:#f6f3a2;
-    --green:rgb(178, 208, 94);
-    --lightgr: #edffbb;
-    --darkor:rgb(194, 111, 10);
-    --darkgr:rgb(129, 151, 68);
-    --darkyel:rgb(181, 175, 3);
+    --lightgr: #d3f969;
     
   }
 *{
@@ -101,12 +101,12 @@ nav{
 
   #botones{
     width: 90%;
-    display: inline;
-    margin: 50px auto;
+    display: block;
+    margin: 10px auto;
   }
 
   #filtro{
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
   #filter{
     width: 5%;
@@ -123,7 +123,7 @@ nav{
 
 
   #ordenar{
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
 
   #sort{
@@ -140,7 +140,7 @@ nav{
   }
 
 #searcher{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
   #searcher>#go{
@@ -219,8 +219,7 @@ nav{
   .indvcard > p{
     text-align: center;
   }
-
-  
+ 
 
   aside{
     flex: 30%;
@@ -232,7 +231,6 @@ nav{
     box-shadow: #443b29 5px 6px 20px 0px;
 
   }
-  
 
 
   .charts{
@@ -249,4 +247,25 @@ nav{
 #chart1, #chart2,#chart3,#chart4{
   box-shadow: #2b4429 5px 6px 20px 0px;
   border-radius: 7px;
+}
+
+#log-out, #back{
+  visibility: hidden;
+}
+
+#userForms{
+  display: grid;
+  margin: 10px auto;
+}
+
+#form1,#form2{
+  display: none;
+  text-align: center;
+  
+}
+#form1>fieldset{
+  background-color: #f6f3a24f;
+}
+#form2>fieldset{
+  background-color: #d3f9693b;
 }
