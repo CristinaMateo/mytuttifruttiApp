@@ -1,7 +1,6 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { getFirestore, collection, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js";
 
 const firebaseConfig = {
@@ -16,7 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //Initialize Auth
-const auth = getAuth();
+const auth = getAuth(app);
 const user = auth.currentUser;
 //Initialize DDBB
 const db = getFirestore(app);
@@ -54,8 +53,8 @@ auth.onAuthStateChanged(user => {
 });
 
 //SignUp function
-signUpForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+signUpForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
   const signUpEmail = document.getElementById('email').value;
   const signUpPassword = document.getElementById('pass').value;
   const signUpUser = document.getElementById('signup-user').value;
@@ -90,7 +89,7 @@ signUpForm.addEventListener('submit', async (e) => {
         
       })
     //Upload file to cloud storage
-    await uploadBytes(storageRef, signUpImg).then(async (snapshot) => {
+    await uploadBytes(storageRef, signUpImg).then(async (_snapshot) => {
       console.log('Uploaded a blob or file!')
       publicImageUrl = await getDownloadURL(storageRef);
     })
@@ -98,7 +97,7 @@ signUpForm.addEventListener('submit', async (e) => {
     await setDoc(doc(usersRef, signUpEmail), {
       username: signUpUser,
       email: signUpEmail,
-      puntuacion: 0,
+      favoriteFruits: 0,
       profile_picture: publicImageUrl
     })
   } catch (error) {
@@ -108,8 +107,8 @@ signUpForm.addEventListener('submit', async (e) => {
 });
 
 //Login function
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+loginForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
   
   const loginEmail = document.getElementById('email2').value;
   const loginPassword = document.getElementById('pass3').value;
@@ -117,6 +116,7 @@ loginForm.addEventListener('submit', async (e) => {
   const docRef = doc(db, "users", loginEmail);
   //Search a document that matches with our ref
   const docSnap = await getDoc(docRef);
+  console.log('docSnap:', docSnap);
 
   if (!validateEmail(loginEmail)) {
     alert("Not a valid email address.");
@@ -135,13 +135,12 @@ loginForm.addEventListener('submit', async (e) => {
       loginForm.reset();
     }).then(() => {
       if (docSnap.exists()) {
-
+        console.log('Document data:', docSnap.data());
         userData.innerHTML = `<p id ="username">${docSnap.data().username}</p>
                               <img src=${docSnap.data().profile_picture} alt='User profile picture'>`
-       
-      
       } else {
-        console.log("No such document!");
+        console.log("An error ocurred.");
+        alert("Not a current user.")
       }
     })
     .catch((error) => {
@@ -151,6 +150,7 @@ loginForm.addEventListener('submit', async (e) => {
       console.log('Error code: ' + errorCode);
       console.log('Error message: ' + errorMessage);
     });
+    
 })
 
 //Logout function
@@ -162,7 +162,6 @@ logout.addEventListener('click', () => {
     console.log('Error: ', error)
   });
 })
-
 
 
 

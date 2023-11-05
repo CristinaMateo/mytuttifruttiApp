@@ -250,7 +250,7 @@ nav{
   border-radius: 7px;
 }
 
-#log-out, #back{
+ #back{
   visibility: hidden;
 }
 
