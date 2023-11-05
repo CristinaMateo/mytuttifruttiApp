@@ -1,4 +1,185 @@
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCwggm1jCtUulRNqc9-SM1Gqc1R2igfquA",
+  authDomain: "tuttifrutti-e61e9.firebaseapp.com",
+  projectId: "tuttifrutti-e61e9",
+  storageBucket: "tuttifrutti-e61e9.appspot.com",
+  messagingSenderId: "987528388916",
+  appId: "1:987528388916:web:85e4bd8e69695e2b438561"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+//Initialize Auth
+const auth = getAuth();
+const user = auth.currentUser;
+//Initialize DDBB
+const db = getFirestore(app);
+
+//Initialize cloudstore
+const storage = getStorage();
+
+const signUpForm = document.getElementById('form1');
+const loginForm = document.getElementById('form2');
+const logout = document.getElementById('log-out');
+const userData = document.getElementById('user-data');
+
+function validateEmail(email) {
+  let mailformat = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/; //letras y numeros guiones y dos o 4 letras al final
+  return mailformat.test(email);
+}
+
+function validateUser(user1) {
+  let mailformat = /^[A-Za-z0-9_-]{1,8}$/; // de 1 a 8 caracteres, alfanumérico
+  return mailformat.test(user1);
+}
+
+function validatePassword(password) {
+  let passFormat = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{7,})\S$/; //una mayuscula, una minuscula, un numero y uncaracter especial
+  return passFormat.test(password);
+}
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log('Usuario autenticado:', user.email);
+  } else {
+    console.log('No hay usuario autenticado');
+    
+  }
+});
+
+//SignUp function
+signUpForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const signUpEmail = document.getElementById('email').value;
+  const signUpPassword = document.getElementById('pass').value;
+  const signUpUser = document.getElementById('signup-user').value;
+  const usersRef = collection(db, "users");
+  const signUpImg = document.getElementById('signup-picture').files[0];
+  const storageRef = ref(storage, signUpImg.name);
+  let publicImageUrl;
+
+  if (!validateEmail(signUpEmail)) {
+    alert("Not a valid email address.");
+    return;
+  }
+
+  if (!validateUser(signUpUser)) {
+    alert("Not a valid username.");
+    return;
+  }
+
+  if (!validatePassword(signUpPassword)) {
+    alert("Password must include at least a number, an uppercase and a lowercase letter. Minimum of 8 char.");
+    return;
+  }
+
+  try {
+    //Create auth user
+    await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+      .then((userCredential) => {
+        console.log('User registered')
+        const user = userCredential.user;
+
+        signUpForm.reset();
+        
+      })
+    //Upload file to cloud storage
+    await uploadBytes(storageRef, signUpImg).then(async (snapshot) => {
+      console.log('Uploaded a blob or file!')
+      publicImageUrl = await getDownloadURL(storageRef);
+    })
+    //Create document in DB
+    await setDoc(doc(usersRef, signUpEmail), {
+      username: signUpUser,
+      email: signUpEmail,
+      puntuacion: 0,
+      profile_picture: publicImageUrl
+    })
+  } catch (error) {
+    console.log('Error: ', error)
+  }
+
+});
+
+//Login function
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const loginEmail = document.getElementById('email2').value;
+  const loginPassword = document.getElementById('pass3').value;
+  //Call the collection in the DB
+  const docRef = doc(db, "users", loginEmail);
+  //Search a document that matches with our ref
+  const docSnap = await getDoc(docRef);
+
+  if (!validateEmail(loginEmail)) {
+    alert("Not a valid email address.");
+    return;
+  }
+
+  if (!validatePassword(loginPassword)) {
+    alert("Not a valid password.");
+    return;
+  }
+
+  signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+    .then((userCredential) => {
+      console.log('User authenticated')
+      const user = userCredential.user;
+      loginForm.reset();
+    }).then(() => {
+      if (docSnap.exists()) {
+
+        userData.innerHTML = `<p id ="username">${docSnap.data().username}</p>
+                              <img src=${docSnap.data().profile_picture} alt='User profile picture'>`
+       
+      
+      } else {
+        console.log("No such document!");
+      }
+    })
+    .catch((error) => {
+      document.getElementById('msgerr').innerHTML = 'Invalid user or password';
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Error code: ' + errorCode);
+      console.log('Error message: ' + errorMessage);
+    });
+})
+
+//Logout function
+logout.addEventListener('click', () => {
+  signOut(auth).then(() => {
+    console.log('Logout user')
+    location.reload();
+  }).catch((error) => {
+    console.log('Error: ', error)
+  });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//variables
 let calories = [];
 let fat = [];
 let sugar = [];
@@ -19,6 +200,19 @@ const sept =['Avocado', 'Raspberry', 'Fig', 'Kiwi',"Hazelnut", "Blueberry", "Lin
 const oct =['Avocado',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Persimmon', 'Tangerine', 'Mango', 'Apple', 'Peach', 'Papaya', 'Pear', 'Pineapple', 'Banana', 'Grape', 'Pomegranate', 'Fig', 'Lemon', 'Orange']
 const nov =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Mango', 'Apple', 'Papaya', 'Pear', "Hazelnut", "Blueberry", "Lingonberry", "Cranberry",'Pineapple', 'Banana', 'Lemon', 'Tangerine', 'Orange', 'Grape']
 const dic =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Lemon', 'Papaya',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry",  'Pear', 'Pineapple', 'Banana', 'Tomato', 'Tangerine', 'Apple', 'Orange', 'Mango', 'Grape']
+
+
+//para abrir los forms de usuario
+document.getElementById("signup-login").addEventListener("click", function(){
+  document.getElementById("botones").style.display="none"
+  document.getElementById("graficas").style.display="none"
+  document.getElementById("general").style.display="none"
+  document.getElementById("signup-login").style.display="none"
+  document.getElementById("back").style.visibility="visible"
+  document.getElementById("form1").style.display = "block"
+  document.getElementById("form2").style.display = "block"
+})
+
 //para volver a la página inicial
 document.getElementById("reload").addEventListener("click", function() {
 
@@ -373,15 +567,7 @@ async function sortFruits(sortFilter) {
 }
       
 
-document.getElementById("signup-login").addEventListener("click", function(){
-  document.getElementById("botones").style.display="none"
-  document.getElementById("graficas").style.display="none"
-  document.getElementById("general").style.display="none"
-  document.getElementById("signup-login").style.display="none"
-  document.getElementById("back").style.visibility="visible"
-  document.getElementById("form1").style.display = "block"
-  document.getElementById("form2").style.display = "block"
-})
+
 
 
 

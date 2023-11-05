@@ -214,6 +214,7 @@ nav{
     text-align: center;
     background-color: var(--lightgr);
     height: fit-content;
+    border-radius: 50px;
   }
 
   .indvcard > p{
