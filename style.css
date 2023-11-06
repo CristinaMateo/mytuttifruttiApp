@@ -172,7 +172,7 @@ nav{
     text-align: center;
   }
 
-  #filter,#sort,#go{
+  #filter,#sort,#go,#create,#log{
     width: max-content;
     background: var(--green);
     color: white;
