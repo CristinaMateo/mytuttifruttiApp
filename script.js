@@ -484,12 +484,17 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
                     .then(res => res.json())
                     .then(data => {
 
-      let tarjetas = ""
-
-   
-     tarjetas+= indvcardTemplate(`./assets/${data.name}.jpg`, data.name, data.nutritions.calories, data.nutritions.fat, data.nutritions.sugar, data.nutritions.carbohydrates, data.nutritions.protein)
-    
-    fruitsNode.innerHTML = tarjetas
+                      if (data.name) {
+                        let tarjetas = ""
+                
+                        tarjetas+= indvcardTemplate(`./assets/${data.name}.jpg`, data.name, data.nutritions.calories, data.nutritions.fat, data.nutritions.sugar, data.nutritions.carbohydrates, data.nutritions.protein)
+                
+                        fruitsNode.innerHTML = tarjetas
+                      } else {
+                        // Mostrar una alerta y redirigir a la página principal
+                        alert("La fruta no existe en la base de datos.");
+                        window.location.href = "/";
+                      }
     });
  
  
