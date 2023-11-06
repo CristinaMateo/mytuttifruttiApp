@@ -136,6 +136,7 @@ loginForm.addEventListener('submit', async (event) => {
         closePopup()
         document.getElementById("log-out").style.visibility="visible";
         document.getElementById("myspace").style.visibility="visible";
+        document.getElementById("user-data").style.visibility="visible";
         userData.innerHTML = `<p id ="username">${docSnap.data().username}</p>
                               <img src=${docSnap.data().profile_picture} alt='User profile picture' id="userimg">`
       } else {
