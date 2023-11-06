@@ -116,8 +116,7 @@ loginForm.addEventListener('submit', async (event) => {
   const docRef = doc(db, "users", loginEmail);
   //Search a document that matches with our ref
   const docSnap = await getDoc(docRef);
-  console.log('docSnap:', docSnap);
-
+ 
   if (!validateEmail(loginEmail)) {
     alert("Not a valid email address.");
     return;
@@ -130,16 +129,16 @@ loginForm.addEventListener('submit', async (event) => {
 
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then((userCredential) => {
-      console.log('User authenticated')
       const user = userCredential.user;
       loginForm.reset();
     }).then(() => {
       if (docSnap.exists()) {
-        console.log('Document data:', docSnap.data());
+        closePopup()
+        document.getElementById("log-out").style.visibility="visible";
+        document.getElementById("myspace").style.visibility="visible";
         userData.innerHTML = `<p id ="username">${docSnap.data().username}</p>
-                              <img src=${docSnap.data().profile_picture} alt='User profile picture'>`
+                              <img src=${docSnap.data().profile_picture} alt='User profile picture' id="userimg">`
       } else {
-        console.log("An error ocurred.");
         alert("Not a current user.")
       }
     })
@@ -151,7 +150,7 @@ loginForm.addEventListener('submit', async (event) => {
       console.log('Error message: ' + errorMessage);
     });
     
-})
+});
 
 //Logout function
 logout.addEventListener('click', () => {
@@ -163,22 +162,36 @@ logout.addEventListener('click', () => {
   });
 })
 
+//para abrir los forms de usuario
+document.getElementById("signup-login").addEventListener("click", function(){
+  document.getElementById("userFormsPopup").style.display = "flex";
+})
+
+//para cerrar popups
+function closePopup() {
+  document.getElementById('userFormsPopup').style.display = 'none';
+  document.getElementById('userSpace').style.display = 'none';
+}
+document.getElementById("close-btn").addEventListener("click", closePopup)
+
+ 
+
+//cuando click en my space, se abre userSpace y se rellenan los datos
+document.getElementById("myspace").addEventListener("click", async function(){
+  document.getElementById("userSpace").style.display = "flex";
+  let persSpace = document.getElementById("persSpace")
+  persSpace.innerHTML=
+  `<h3>Welcome to your own space (prototype)</h3>
+  <img src="./assets/Apple.jpg" alt="Apple">
+  <h5>Check your favorite fruits:</h5>
+  <p>Here would the users favorite fruits be.</p>`
+
+})
+document.getElementById("close-space").addEventListener("click", closePopup)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//variables
+//variables frutas
 let calories = [];
 let fat = [];
 let sugar = [];
@@ -201,16 +214,6 @@ const nov =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Mango', 'Apple', 'Pa
 const dic =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Lemon', 'Papaya',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry",  'Pear', 'Pineapple', 'Banana', 'Tomato', 'Tangerine', 'Apple', 'Orange', 'Mango', 'Grape']
 
 
-//para abrir los forms de usuario
-document.getElementById("signup-login").addEventListener("click", function(){
-  document.getElementById("botones").style.display="none"
-  document.getElementById("graficas").style.display="none"
-  document.getElementById("general").style.display="none"
-  document.getElementById("signup-login").style.display="none"
-  document.getElementById("back").style.visibility="visible"
-  document.getElementById("form1").style.display = "block"
-  document.getElementById("form2").style.display = "block"
-})
 
 //para volver a la página inicial
 document.getElementById("reload").addEventListener("click", function() {
@@ -219,12 +222,8 @@ document.getElementById("reload").addEventListener("click", function() {
   
   });
 
-  document.getElementById("back").addEventListener("click", function() {
 
-    location.reload();
-    
-    });
-
+//creacion de gráficas
 function generarGrafica(){
   const sugarchart = document.getElementById('chart1');
   
@@ -332,14 +331,14 @@ function generarGrafica(){
   
   }
 
-
+//general tarjetas
   const cardTemplate = function (image, fruit) {
     return `<div class="card" id="card-${fruit}">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
                 <h3 class="center">${fruit}</h3>
               </div>`;
 };
-
+//tarjetas individuales
 const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
   return `<article class="indvcard">
               <img src="${image}" alt="${fruit}" class="fruitimg">
@@ -351,12 +350,11 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
               <p class="details">Sugar: ${sugar}</p>
             </article>`;
 };
-
+//llamar a tarjetas individuales
 function showIndvCard(fruit) {
   let tarjetaIndividual = indvcardTemplate(`./assets/${fruit.name}.jpg`, fruit.name, fruit.nutritions.calories, fruit.nutritions.fat, fruit.nutritions.sugar, fruit.nutritions.carbohydrates, fruit.nutritions.protein);
   fruitsNode.innerHTML = tarjetaIndividual;
 }
-
 
 
 //mostrar frutas de temporada
@@ -430,9 +428,7 @@ function comprobarMes(){
 }
 
 
-
-
-//para mostrar todas las frutas
+//para mostrar todas las frutas y al hacer click en una tarjeta llamar a la individual, subir datos de frutas a variables
 async function getFruits() {
     let response = await fetch(api);
     let data = await response.json();
@@ -465,7 +461,7 @@ async function getFruits() {
     generarGrafica()
   }
   
-  
+ //llamada a frutas y mes de consulta 
 getFruits()
 comprobarMes()
 
