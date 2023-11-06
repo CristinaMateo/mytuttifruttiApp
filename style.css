@@ -1,0 +1,361 @@
+/*general*/
+:root {
+    --orange: #fdb55d;
+    --yellow: #e7e14d;
+    --green:#b2d05e;
+    --darkor:#c26f0a;
+    --darkgr:#819744;
+    --darkyel:#b5af03;
+    --lightor:#ffd4a0;
+    --lightyel:#f6f3a2;
+    --lightgr: #d3f969;
+    
+  }
+*{
+    box-sizing: border-box;
+  }
+  
+html {
+      scroll-behavior: smooth;
+    }
+  
+body {
+    font-family: 'Yomogi';
+    font-size: 20px;
+    background: url('./assets/fondo.jpg') ;
+    background-position: absolute; 
+    background-size: cover;
+    background-repeat:repeat-y;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    backdrop-filter: blur(1px);
+    }
+
+header{
+    width:70%;
+    margin:auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--orange);
+    border-radius: 1em;
+    padding: 0.25em 0.5em;
+    }
+
+main{
+  width:90%;
+  margin:auto;
+  display: flex;
+  flex-wrap: wrap;
+  }
+  
+nav{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
+    
+  nav > button {
+    background-color: #fff7ec ;
+    padding: 0.7em 1.1em;
+    text-decoration: none;
+    text-align: center;
+    border:#FDB55D solid;
+    margin: 0.1em;
+    }
+  
+  nav >button:hover{
+      background-color:var(--lightor) ;
+      cursor: pointer;
+    }
+
+  
+    h1{
+    text-align: center;
+    color: white;
+    }
+   
+
+    footer{
+      margin-top: 2.5em;
+      margin-bottom: 3em;
+    }
+   
+    div.top{
+      position:fixed;
+      bottom:0.45em;
+      right: 0.45em;
+      background-color: var(--lightgr);
+      padding: 0.5em;
+      border-radius: 0.25em;
+      opacity:80%;
+      box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.1), 0px 6px 0px 4px rgba(0,0,0,0.1), 5px 5px 3px 5px rgba(252,213,206,0);
+  }
+  
+    div.top > a{
+      text-decoration: none;
+      color:black;
+  }
+
+  #log-out, #myspace{
+    visibility: hidden;
+  }
+
+  #user-data{
+    background-color: #f6f3a2c6;
+    width: 20%;
+    margin: 20px auto;
+    text-align: center;
+    padding: 0.5em;
+    visibility: hidden;
+  }
+  #user-data>img{
+    width: 70%;
+  }
+
+  #userFormsPopup, #userSpace{
+    display: none; 
+    position: fixed; 
+    top: 20em;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+    justify-content: center;
+    align-items: center;
+  }
+  
+#persSpace,#userForms {
+  background: rgb(255, 255, 255);
+  padding: 1em;
+  border-radius: 0.5em;
+  width: 70%;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+  display: flex; 
+  flex-direction: column;
+  margin: 1em auto;
+}
+
+#form1,#form2{
+  text-align: center; 
+}
+#form1>fieldset{
+  background-color: #f6f3a24f;
+}
+#form2>fieldset{
+  background-color: #d3f9693b;
+}
+
+#close-btn,#close-space {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#persSpace>img{
+  width: 30%;
+}
+
+  #botones{
+    width: 90%;
+    display: block;
+    margin: 0.5em auto;
+    text-align: center;
+  }
+
+  #filter,#sort,#go,#create,#log{
+    width: max-content;
+    background: var(--green);
+    color: white;
+    font-size: 0.85em;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    &:active{
+      background-color: rgb(142, 168, 71);
+    }
+  }
+
+
+#search,#ordenar,#filtro{
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+  
+  #reload{
+    visibility: hidden;
+    width: 15%;
+    background: var(--yellow);
+    color: rgb(104, 97, 97);
+    font-size: 0.85em;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    margin-top: 1em;
+    &:active{
+      background-color: rgb(171, 167, 60);;
+    }
+  }
+
+  #general{
+    width:100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #frutas{
+    flex: 70%;
+    padding: 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0;
+    }
+
+  .card{
+    background-color: whitesmoke;
+    width: 23%;
+    margin: 0.5em auto;
+    display:grid;
+    justify-content: center;
+    box-shadow: #573102 5px 6px 20px 0px;
+    border-radius: 0.5em;
+  }
+  .indvcard{
+    background-color: whitesmoke;
+    width: 50%;
+    margin: 0.5em auto;
+    display:grid;
+    justify-content: center;
+    box-shadow: #573102 5px 6px 20px 0px;
+    border-radius: 0.1em;
+  }
+
+  .fruitimg{
+    width: 70%;
+    margin: 0.5em auto;
+  }
+
+  .card > h3, .indvcard > h3{
+    text-align: center;
+    background-color: var(--lightgr);
+    height: fit-content;
+    border-radius: 2.5em;
+  }
+
+  .indvcard > p{
+    text-align: center;
+  }
+ 
+
+  aside{
+    flex: 30%;
+    padding: 1.25em 0.8em;
+    margin-top: 1.25em;
+    background-color: var(--yellow);
+    height: fit-content;
+    width: 30%;
+    box-shadow: #443b29 5px 6px 20px 0px;
+
+  }
+
+  .charts{
+    flex: 45%;
+    margin: 1.5em 3.5em;
+    background-color: white;
+  }
+
+#graficas{
+  width: 80%;
+  margin: auto;
+}
+
+#chart1, #chart2,#chart3,#chart4{
+  box-shadow: #2b4429 5px 6px 20px 0px;
+  border-radius: 0.35em;
+}
+
+@media screen and (max-width: 1060px) {
+  header{
+    width: 90%;
+    margin: auto;
+  }
+  .card{
+    flex: 50%;
+    max-width: 45%;
+  }
+  .charts{
+    flex: 80%;
+  }
+  #graficas{
+    width: 90%;
+  }
+}
+
+
+@media screen and (max-width: 750px) {
+  main{
+    width: 90%;
+  }
+ 
+   main{   
+    flex-direction: column;
+  }
+  header{
+    width: 100%;
+    margin: auto;
+  }
+  #general{
+    padding: 1.25em 0;
+    max-width: 90vw;
+  }
+  aside{
+    width: 70%;
+    height: max-content;
+    padding: 1em;
+    flex: 80%;
+  }
+  #frutas{
+    width: 90%;
+    flex: 100%;
+  }
+  #searcher,#sortForm,#filterForm{
+    display:grid;
+    width: max-content;
+  }
+  #graficas{
+    width: 100%;
+  }
+  .charts{
+    flex: 90%;
+  }
+  #userForms{
+    width: 90%;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .card{
+    flex: 100%;
+    max-width: 80%;
+  }
+  .charts{
+    flex: 100%;
+    width: 90%;
+  }
+  
+  #form1 > fieldset, #form2 > fieldset{
+    padding: 0.45em 0.9em;
+}
+}

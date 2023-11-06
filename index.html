@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tutti Frutti App</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href='https://fonts.googleapis.com/css?family=Yomogi' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav >
+        <button id="log-out" >Log out</button>
+        <button id="myspace">My Space</button>
+        <button id="signup-login">Sign up/Log in</button>
+        
+    </nav>
+    <header id="top">
+        <h1>My Tutti Frutti App</h1> 
+    </header>
+    
+    <main>
+        <div id="user-data"></div> 
+        <section id="userFormsPopup">
+            <button id="close-btn">X</button>
+            <article id = "userForms">
+                <form id ="form1" action="#" method="POST">
+                    <h3>Create an account</h3>
+                    <fieldset>
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
+                        <label for="signup-user">Username: </label> <br>
+                        <input type="text" id="signup-user" name="signup-user" placeholder ="Username"><br>
+                        <label for="pass">Password:</label><br>
+                        <input type="password" id="pass" name="pass" placeholder="Introduce password..."><br>
+                        <label for="pass2">Repeat password:</label><br>
+                        <input type="password" id="pass2" name="pass2" placeholder="Repite password..."><br>
+                        <label for="signup-picture">Picture: </label><br>
+                        <input type="file" id="signup-picture" accept="image/*" name="signup-picture"><br><br>
+                        <input type="submit" value="Create" id="create">                 
+                    </fieldset>
+                </form>
+                <form id ="form2" action="#" method="POST">
+                    <h3>Log in</h3>
+                    <fieldset>
+                        <label for="email2">Email:</label><br>
+                        <input type="email" id="email2" name="email2" placeholder="Introduce email..."><br>
+                        <label for="pass3">Password:</label><br>
+                        <input type="password" id="pass3" name="pass3" placeholder="Introduce password..."><br>
+                        <input type="submit" value="Log in" id="log"> 
+                    </fieldset>
+                </form>
+                <p id="msgerr"></p>
+            </article>
+        </section>
+
+        <section id="userSpace">
+            <button id="close-space">X</button>
+            <article id="persSpace"></article>
+        </section>
+
+        <section id="botones">
+            <form id="filterForm">
+                <label for="filtro">Filter by fruit order-type</label>
+                <select name="filtro" id="filtro">
+                    <option value="none">None</option>
+                    <option value="rosales">Rosales</option>
+                    <option value="zingiberales">Zingiberales</option>
+                    <option value="solanales">Solanales</option>
+                    <option value="malvales">Malvales</option>
+                    <option value="ericales">Ericales</option>
+                    <option value="sapindales">Sapindales</option>
+                    <option value="poales">Poales</option>
+                    <option value="saxifragales">Saxifragales</option>
+                    <option value="malpighiales">Malpighiales</option>
+                    <option value="cucurbitales">Cucurbitales</option>
+                    <option value="myrtales">Myrtales</option>
+                    <option value="caricacea">Caricacea</option>
+                    <option value="caryophyllales">Caryophyllales</option>
+                    <option value="vitales">Vitales</option>
+                    <option value="myrtoideae">Myrtoideae</option>
+                    <option value="laurales">Laurales</option>
+                    <option value="fagales">Fagales</option>
+                    <option value="cucurbitaceae">Cucurbitaceae</option>
+                </select>
+                    <input type="submit" id="filter" value="Go"></input>
+            </form>
+
+            <form id="sortForm">
+                <label for="ordenar">Choose sort-type</label>
+                <select name="ordenar" id="ordenar">
+                    <option value="none">None</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                    <option value="caloriesup">Calories Ascendent</option>
+                    <option value="caloriesdown">Calories Descendent</option>
+                </select>
+                    <input type="submit" id="sort" value="Go"></input>
+            </form>
+
+            <form id="searcher">
+                <label for="search">Search for a fruit:</label>
+                <input type="text" id="search" name="search" placeholder="Fruit">
+                <input id="go" type="submit" value="Go"></input>
+            </form>
+
+            <button id="reload">Back to Home</button>
+        </section> 
+
+        <section id="general">
+            <article id="frutas">
+                
+            </article>
+            <aside id="temporada">
+                <h3>In season this month in Spain:</h3>
+                <ul id="frutTemp"></ul>
+                <p>Please remember that not all of these fruits are local in Spain. Make a responsible consumption of them.</p>
+            </aside> 
+        </section>
+    
+        <section id="graficas">
+                <canvas id="chart1" class="charts"></canvas>
+                <canvas id="chart2" class="charts"></canvas>
+                <canvas id="chart3" class="charts"></canvas>
+                <canvas id="chart4" class="charts"></canvas>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="top"><a href="#top">Back to top &#128285;</a></div>
+    </footer>
+
+    
+    <script type="module" src="./script.js"></script> 
+</body>
+</html>
