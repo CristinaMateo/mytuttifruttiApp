@@ -120,7 +120,7 @@ nav{
   #userFormsPopup, #userSpace{
     display: none; 
     position: fixed; 
-    top: 10em;
+    top: 20em;
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.5); 
@@ -137,6 +137,7 @@ nav{
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
   display: flex; 
   flex-direction: column;
+  margin: 1em auto;
 }
 
 #form1,#form2{
@@ -338,6 +339,9 @@ nav{
   .charts{
     flex: 90%;
   }
+  #userForms{
+    width: 90%;
+  }
   
 }
 
@@ -350,4 +354,8 @@ nav{
     flex: 100%;
     width: 90%;
   }
+  
+  #form1 > fieldset, #form2 > fieldset{
+    padding: 0.45em 0.9em;
+}
 }
