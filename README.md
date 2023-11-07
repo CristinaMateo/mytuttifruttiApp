@@ -25,7 +25,7 @@ You can also register and log in as a user. Your profile image and username will
 
 ![Forms](./assets/readme/readme5.png)
 ![userdata](./assets/readme/readme6.png)
-![user page](./assets/readme/readme7.png)
+![userdata](./assets/readme/readme8.png)
 
 
 ## Used in this project:

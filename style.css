@@ -106,12 +106,14 @@ nav{
   }
 
   #user-data{
-    background-color: #f6f3a2c6;
+    background-color: #fffef3;
     width: 20%;
     margin: 20px auto;
     text-align: center;
     padding: 0.5em;
     visibility: hidden;
+    box-shadow: #6d5f4e 2px 1px 13px 0px;
+    border-radius: 0.5em;
   }
   #user-data>img{
     width: 70%;
@@ -130,7 +132,7 @@ nav{
   }
   
 #persSpace,#userForms {
-  background: rgb(255, 255, 255);
+  background: rgb(252, 255, 245);
   padding: 1em;
   border-radius: 0.5em;
   width: 70%;
@@ -139,6 +141,29 @@ nav{
   flex-direction: column;
   margin: 1em auto;
 }
+
+#persSpace{
+  text-align: center;
+  
+  & >h3{
+    color: var(--darkor);
+  }
+
+  & >#profilePicture{
+    margin: auto;
+    width: 30%;
+  }
+
+  & >h5{
+    color: var(--darkgr);
+  }
+
+  & >p{
+    color: var(--darkyel);
+  }
+}
+
+
 
 #form1,#form2{
   text-align: center; 
@@ -161,9 +186,6 @@ nav{
   cursor: pointer;
 }
 
-#persSpace>img{
-  width: 30%;
-}
 
   #botones{
     width: 90%;
@@ -178,7 +200,6 @@ nav{
     color: white;
     font-size: 0.85em;
     border: 1px solid grey;
-    border-left: none;
     cursor: pointer;
     &:active{
       background-color: rgb(142, 168, 71);
@@ -241,6 +262,24 @@ nav{
     border-radius: 0.1em;
   }
 
+  #saveFav,#elimFav{
+    visibility: hidden;
+    padding: 0.25em;
+    margin: 0.25em auto;
+    width: max-content;
+    background: var(--green);
+    color: white;
+    font-size: 0.85em;
+    border: 1px solid grey;
+    cursor: pointer;
+    &:active{
+      background-color: rgb(142, 168, 71);
+    }
+  }
+  #favDisplay{
+    word-break: break-all;
+  }
+
   .fruitimg{
     width: 70%;
     margin: 0.5em auto;
@@ -273,17 +312,18 @@ nav{
     flex: 45%;
     margin: 1.5em 3.5em;
     background-color: white;
+    box-shadow: #2b4429 5px 6px 20px 0px;
+    border-radius: 0.35em;
+
   }
 
 #graficas{
   width: 80%;
   margin: auto;
+  height: 80%;
 }
 
-#chart1, #chart2,#chart3,#chart4{
-  box-shadow: #2b4429 5px 6px 20px 0px;
-  border-radius: 0.35em;
-}
+
 
 @media screen and (max-width: 1060px) {
   header{
@@ -299,6 +339,9 @@ nav{
   }
   #graficas{
     width: 90%;
+  }
+  #user-data{
+    width: 35%;
   }
 }
 
@@ -342,6 +385,9 @@ nav{
   #userForms{
     width: 90%;
   }
+  #user-data{
+    width: 50%;
+  }
   
 }
 
@@ -352,7 +398,7 @@ nav{
   }
   .charts{
     flex: 100%;
-    width: 90%;
+    width: 100%;
   }
   
   #form1 > fieldset, #form2 > fieldset{
