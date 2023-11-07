@@ -263,6 +263,7 @@ nav{
   }
 
   #saveFav{
+    visibility: hidden;
     padding: 0.25em;
     margin: 0.25em auto;
     width: max-content;

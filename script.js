@@ -232,7 +232,13 @@ const dic =['Avocado', 'Persimmon', 'Pomegranate', 'Kiwi', 'Lemon', 'Papaya',"Ha
 //para volver a la página inicial
 document.getElementById("reload").addEventListener("click", function() {
 
-  location.reload();
+ getFruits()
+  document.getElementById("graficas").style.display = "block";
+  document.getElementById("temporada").style.display = "block";
+  document.getElementById("filterForm").reset()
+  document.getElementById("sortForm").reset()
+  document.getElementById("searcher").reset()
+  document.getElementById("reload").style.visibility = "hidden"
   
   });
 
@@ -263,7 +269,6 @@ function generarGrafica(){
   
     }
   });
-  
   
   const proteinChart = document.getElementById('chart2');
   
@@ -354,7 +359,7 @@ function generarGrafica(){
 };
 //tarjetas individuales
 const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, protein) {
-  return `<article class="indvcard">
+  return `<article class="indvcard" id="${fruit}">
               <img src="${image}" alt="${fruit}" class="fruitimg">
               <h3 class="center">${fruit}</h3>
               <p class="details">Calories: ${calories}</p>
@@ -372,25 +377,24 @@ function showIndvCard(fruit) {
   let tarjetaIndividual = indvcardTemplate(`./assets/${fruit.name}.jpg`, fruit.name, fruit.nutritions.calories, fruit.nutritions.fat, fruit.nutritions.sugar, fruit.nutritions.carbohydrates, fruit.nutritions.protein);
   fruitsNode.innerHTML = tarjetaIndividual;
 
+  if(loginEmail){
+    document.getElementById("saveFav").style.visibility="visible";
+  }
+
   //guardar fruta en favoritos
-document.getElementById("saveFav").addEventListener("click", async function(){
-  let userEmail = loginEmail
-  const userRef = await doc(db, 'users', userEmail);
-  let fruit = document.getElementsByClassName("center")
-  const frutasFav = doc.data().favoriteFruits || [];
-  console.log(fruit)
-  console.log(frutasFav)
-  
-  frutasFav.push(fruit);
-  updateDoc(userRef, {
-    favoriteFruits: frutasFav
-  }).then(() => {
-    console.log("Document successfully updated!");
-  }).catch((error) => {
-    console.error("Error updating document: ", error);
+  document.getElementById("saveFav").addEventListener("click", function(event){
+    let fruit = event.target.parentNode.id
+    let userEmail = loginEmail
+    const userRef = doc(db, 'users', userEmail);
+    getDoc(userRef).then((doc) => {
+      const frutasFav = doc.data().favoriteFruits || [];
+      console.log(fruit)
+      console.log(frutasFav)
+    }).catch((error) => {
+      console.error("Error on user reference ", error);
+    });
+
   });
- 
-})
 
 }
 
@@ -506,6 +510,7 @@ comprobarMes()
 
 
 
+
   //cuando se busca una sola fruta
 document.getElementById("searcher").addEventListener("submit", function(event) {   
 
@@ -549,7 +554,7 @@ document.getElementById("filterForm").addEventListener("submit", function(event)
   let orderFilter = filterForm.filtro.value 
 
   if(orderFilter == "none"){
-    location.reload()
+    getFruits()
   }else if(orderFilter != "none"){
 
   fetch(`https://www.fruityvice.com/api/fruit/order/${orderFilter}`)
@@ -580,7 +585,7 @@ document.getElementById("sortForm").addEventListener("submit", function(event) {
   let sortFilter = document.getElementById("ordenar").value;
 
   if(sortFilter == "none"){
-    location.reload()
+    getFruits()
   }else if(sortFilter != "none"){
     sortFruits(sortFilter);
 
