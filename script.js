@@ -192,7 +192,7 @@ document.getElementById("myspace").addEventListener("click", async function(){
   <img id="profilePicture" src="${doc.data().profile_picture}" alt="Profile Picture">
   <p id="username">${doc.data().username}</p>
   <h5>Check your favorite fruits:</h5>
-  <p>${doc.data().favoriteFruits}</p>`
+  <p id="favDisplay">${doc.data().favoriteFruits}</p>`
     } 
     
 
@@ -368,6 +368,7 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
               <p class="details">Fat: ${fat}</p>
               <p class="details">Sugar: ${sugar}</p>
               <button id="saveFav">Add to favorites</button>
+              <button id="elimFav">Remove from favorites</button>
             </article>`;
 };
 
@@ -379,6 +380,7 @@ function showIndvCard(fruit) {
 
   if(loginEmail){
     document.getElementById("saveFav").style.visibility="visible";
+    document.getElementById("elimFav").style.visibility="visible";
   }
 
   //guardar fruta en favoritos
@@ -389,8 +391,9 @@ function showIndvCard(fruit) {
     getDoc(userRef).then((doc) => {
       const frutasFav = doc.data().favoriteFruits || [];
 
-      if (!favoritos.includes(elemento)){
+      if (!frutasFav.includes(fruit)){
       frutasFav.push(fruit);
+      }
       updateDoc(userRef, {
         favoriteFruits: frutasFav
       }).then(() => {
@@ -399,10 +402,36 @@ function showIndvCard(fruit) {
       }).catch((error) => {
         console.error("Error updating document: ", error);
       });
-    } 
+    
   });
-
+  
 })
+
+//eliminar de favoritos
+document.getElementById("elimFav").addEventListener("click", function(event){
+  let fruit = event.target.parentNode.id
+  let userEmail = loginEmail
+  const userRef = doc(db, 'users', userEmail);
+  getDoc(userRef).then((doc) => {
+    const frutasFav = doc.data().favoriteFruits || [];
+    let index = frutasFav.indexOf(fruit);
+    console.log(index);
+
+    if (frutasFav.includes(fruit)){
+    frutasFav.splice(index, 1);
+    }
+    updateDoc(userRef, {
+      favoriteFruits: frutasFav
+    }).then(() => {
+      console.log("Document successfully updated!");
+    
+    }).catch((error) => {
+      console.error("Error updating document: ", error);
+    });
+  
+});
+})
+
 
 }
 

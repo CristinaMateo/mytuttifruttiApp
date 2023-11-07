@@ -262,7 +262,7 @@ nav{
     border-radius: 0.1em;
   }
 
-  #saveFav{
+  #saveFav,#elimFav{
     visibility: hidden;
     padding: 0.25em;
     margin: 0.25em auto;
@@ -275,7 +275,9 @@ nav{
     &:active{
       background-color: rgb(142, 168, 71);
     }
-
+  }
+  #favDisplay{
+    word-break: break-all;
   }
 
   .fruitimg{
