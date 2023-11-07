@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import { getFirestore, collection, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js";
 
 const firebaseConfig = {
@@ -27,7 +27,7 @@ const signUpForm = document.getElementById('form1');
 const loginForm = document.getElementById('form2');
 const logout = document.getElementById('log-out');
 const userData = document.getElementById('user-data');
-
+let loginEmail = ""
 function validateEmail(email) {
   let mailformat = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/; //letras y numeros guiones y dos o 4 letras al final
   return mailformat.test(email);
@@ -81,9 +81,9 @@ signUpForm.addEventListener('submit', async (event) => {
   try {
     //Create auth user
     await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-      .then((userCredential) => {
+      .then(() => {
         console.log('User registered')
-        const user = userCredential.user;
+        
 
         signUpForm.reset();
         
@@ -110,10 +110,10 @@ signUpForm.addEventListener('submit', async (event) => {
 loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   
-  const loginEmail = document.getElementById('email2').value;
+  loginEmail = document.getElementById('email2').value;
   const loginPassword = document.getElementById('pass3').value;
   //Call the collection in the DB
-  const docRef = doc(db, "users", loginEmail);
+  const docRef = await doc(db, "users", loginEmail);
   //Search a document that matches with our ref
   const docSnap = await getDoc(docRef);
  
@@ -128,8 +128,7 @@ loginForm.addEventListener('submit', async (event) => {
   }
 
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-    .then((userCredential) => {
-      const user = userCredential.user;
+    .then(() => {
       loginForm.reset();
     }).then(() => {
       if (docSnap.exists()) {
@@ -176,18 +175,33 @@ function closePopup() {
 document.getElementById("close-btn").addEventListener("click", closePopup)
 
  
-
 //cuando click en my space, se abre userSpace y se rellenan los datos
 document.getElementById("myspace").addEventListener("click", async function(){
-  document.getElementById("userSpace").style.display = "flex";
+  let userEmail = loginEmail
   let persSpace = document.getElementById("persSpace")
-  persSpace.innerHTML=
-  `<h3>Welcome to your own space (prototype)</h3>
-  <img src="./assets/Apple.jpg" alt="Apple">
+  
+  const docRef = await doc(db, 'users', userEmail);
+  
+  try {
+    const doc = await getDoc(docRef);
+    console.log(doc.data())
+    if (doc.exists()) {
+      document.getElementById("userSpace").style.display = "flex";
+      persSpace.innerHTML=
+  `<h3>Welcome to your own space </h3>
+  <img id="profilePicture" src="${doc.data().profile_picture}" alt="Profile Picture">
+  <p id="username">${doc.data().username}</p>
   <h5>Check your favorite fruits:</h5>
-  <p>Here would the users favorite fruits be.</p>`
+  <p>${doc.data().favoriteFruits}</p>`
+    } 
+    
 
-})
+    }catch (error) {
+      console.error("Error al obtener el documento: ", error);
+  }
+}) 
+
+
 document.getElementById("close-space").addEventListener("click", closePopup)
 
 
@@ -200,7 +214,6 @@ let carbs = [];
 let protein = [];
 let nombre = [];
 const fruitsNode = document.getElementById("frutas");
-const api = 'https://www.fruityvice.com/api/fruit/all'
 const enero = ["Hazelnut", "Blueberry", "Lingonberry", "Cranberry", 'Avocado', 'Papaya', 'Pear', 'Pineapple', 'Banana', 'Kiwi', 'Lemon', 'Tangerine', 'Mango', 'Apple', 'Orange', 'Pomelo', "Tomato", 'Pomegranate', 'Persimmon']
 const febr =['Banana', 'Pomelo', 'Tomato','Persimmon', 'Pomegranate', 'Avocado', 'Kiwi', 'Lemon', 'Tangerine', 'Mango', 'Apple', 'Orange', 'Papaya', 'Pear', 'Pineapple',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry"]
 const marzo =['Pineapple', 'Banana', 'Pomelo', 'Avocado', 'Lemon', 'Strawberries', 'Mango', 'Apple', 'Orange', 'Papaya', 'Pear', 'Tomato', 'Kiwi',"Hazelnut", "Blueberry", "Lingonberry", "Cranberry"]
@@ -336,7 +349,7 @@ function generarGrafica(){
   const cardTemplate = function (image, fruit) {
     return `<div class="card" id="card-${fruit}">
                 <img src="${image}" alt="${fruit}" class="fruitimg">
-                <h3 class="center">${fruit}</h3>
+                <h3 ">${fruit}</h3>
               </div>`;
 };
 //tarjetas individuales
@@ -349,12 +362,36 @@ const indvcardTemplate = function (image, fruit, calories, fat, sugar, carbs, pr
               <p class="details">Carbs: ${carbs}</p>
               <p class="details">Fat: ${fat}</p>
               <p class="details">Sugar: ${sugar}</p>
+              <button id="saveFav">Add to favorites</button>
             </article>`;
 };
+
+
 //llamar a tarjetas individuales
 function showIndvCard(fruit) {
   let tarjetaIndividual = indvcardTemplate(`./assets/${fruit.name}.jpg`, fruit.name, fruit.nutritions.calories, fruit.nutritions.fat, fruit.nutritions.sugar, fruit.nutritions.carbohydrates, fruit.nutritions.protein);
   fruitsNode.innerHTML = tarjetaIndividual;
+
+  //guardar fruta en favoritos
+document.getElementById("saveFav").addEventListener("click", async function(){
+  let userEmail = loginEmail
+  const userRef = await doc(db, 'users', userEmail);
+  let fruit = document.getElementsByClassName("center")
+  const frutasFav = doc.data().favoriteFruits || [];
+  console.log(fruit)
+  console.log(frutasFav)
+  
+  frutasFav.push(fruit);
+  updateDoc(userRef, {
+    favoriteFruits: frutasFav
+  }).then(() => {
+    console.log("Document successfully updated!");
+  }).catch((error) => {
+    console.error("Error updating document: ", error);
+  });
+ 
+})
+
 }
 
 
@@ -431,7 +468,7 @@ function comprobarMes(){
 
 //para mostrar todas las frutas y al hacer click en una tarjeta llamar a la individual, subir datos de frutas a variables
 async function getFruits() {
-    let response = await fetch(api);
+    let response = await fetch('https://www.fruityvice.com/api/fruit/all');
     let data = await response.json();
   
     let cards = ""
@@ -465,6 +502,9 @@ async function getFruits() {
  //llamada a frutas y mes de consulta 
 getFruits()
 comprobarMes()
+
+
+
 
   //cuando se busca una sola fruta
 document.getElementById("searcher").addEventListener("submit", function(event) {   
@@ -549,7 +589,7 @@ document.getElementById("sortForm").addEventListener("submit", function(event) {
 });
 
 async function sortFruits(sortFilter) {
-  let data = await fetch(api).then(res => res.json());
+  let data = await fetch('https://www.fruityvice.com/api/fruit/all').then(res => res.json());
   if (sortFilter == "az") {
     data.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortFilter == "za") {
