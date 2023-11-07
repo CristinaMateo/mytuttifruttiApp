@@ -388,18 +388,22 @@ function showIndvCard(fruit) {
     const userRef = doc(db, 'users', userEmail);
     getDoc(userRef).then((doc) => {
       const frutasFav = doc.data().favoriteFruits || [];
+
+      if (!favoritos.includes(elemento)){
       frutasFav.push(fruit);
       updateDoc(userRef, {
         favoriteFruits: frutasFav
       }).then(() => {
         console.log("Document successfully updated!");
+      
       }).catch((error) => {
         console.error("Error updating document: ", error);
       });
-
+    } 
   });
 
 })
+
 }
 
 
