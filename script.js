@@ -572,7 +572,7 @@ document.getElementById("searcher").addEventListener("submit", function(event) {
                       } else {
                         // Mostrar una alerta y redirigir a la página principal
                         alert("La fruta no existe en la base de datos.");
-                        window.location.href = "/";
+                        getFruits(), document.getElementById("searcher").reset();
                       }
     });
  
