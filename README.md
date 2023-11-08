@@ -1,4 +1,4 @@
-# My tutti Frutti App
+# My Tutti Frutti App
 
 visit page here: https://juhing-99.github.io/mytuttifruttiApp/
 
