@@ -251,7 +251,9 @@ nav{
     justify-content: center;
     box-shadow: #573102 5px 6px 20px 0px;
     border-radius: 0.5em;
+    cursor: pointer;
   }
+  
   .indvcard{
     background-color: whitesmoke;
     width: 50%;
