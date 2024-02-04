@@ -1,6 +1,6 @@
 # My Tutti Frutti App
 
-visit page here: https://juhing-99.github.io/mytuttifruttiApp/
+visit page here: https://cristinamateo.github.io/mytuttifruttiApp/
 
 ![First look](./assets/readme/readme1.png)
 
