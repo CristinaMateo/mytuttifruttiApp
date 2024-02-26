@@ -1,6 +1,6 @@
 # My Tutti Frutti App
 
-visit page here: https://cristinamateo.github.io/mytuttifruttiApp/
+[Visit page here](https://cristinamateo.github.io/mytuttifruttiApp/)
 
 ![First look](./assets/readme/readme1.png)
 
